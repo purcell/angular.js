@@ -1130,8 +1130,9 @@ function $CompileProvider($provide) {
       // reapply the old attributes to the new element
       forEach(dst, function(value, key) {
         if (key.charAt(0) != '$') {
-          if (src[key]) {
-            value += (key === 'style' ? ';' : ' ') + src[key];
+          var srcVal = src[key];
+          if (srcVal && srcVal !== value) {
+            value += (key === 'style' ? ';' : ' ') + srcVal;
           }
           dst.$set(key, value, true, srcAttr[key]);
         }
