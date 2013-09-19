@@ -383,7 +383,10 @@ function $CompileProvider($provide) {
           if (writeAttr !== false) {
             if (value === null || value === undefined) {
               this.$$element.removeAttr(attrName);
-            } else {
+            } else if (value !== this.$$element.attr(attrName)) {
+              // Set new value only if it is not already there, avoiding
+              // issues with IE, where certain attributes cannot be set
+              // on in-document elements, e.g. 'type' on <input>
               this.$$element.attr(attrName, value);
             }
           }
