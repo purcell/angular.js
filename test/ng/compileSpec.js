@@ -554,6 +554,14 @@ describe('$compile', function() {
           expect(div.attr('data-foo')).toBe('bar');
         }));
 
+        it('should give priority to original attributes when merging', inject(function($compile, $rootScope) {
+          element = $compile(
+            '<div><div replace-with-arbitrary-attribute data-foo="old"/><div>')
+            ($rootScope);
+          var div = element.find('div');
+          expect(div.attr('data-foo')).toBe('old');
+        }));
+
         it('should prevent multiple templates per element', inject(function($compile) {
           try {
             $compile('<div><span replace class="replace"></span></div>');

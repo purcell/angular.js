@@ -1131,7 +1131,7 @@ function $CompileProvider($provide) {
       forEach(dst, function(value, key) {
         if (key.charAt(0) != '$') {
           var srcVal = src[key];
-          if (srcVal && srcVal !== value) {
+          if (srcVal && (srcVal === 'style' || srcVal === 'class')) {
             value += (key === 'style' ? ';' : ' ') + srcVal;
           }
           dst.$set(key, value, true, srcAttr[key]);
